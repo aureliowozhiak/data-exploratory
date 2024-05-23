@@ -2,29 +2,26 @@ import streamlit as st
 import pandas as pd
 
 def main():
-    # titulo
-    st.title("Opa!")
+    # titulo do app
+    st.title("Data Engineer Helper Tool")
 
-    # descrição
+    # descrição do app
     st.text('''     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et dui turpis.
     Nulla eu dolor ac magna iaculis tempus. Mauris quis metus tortor.
     Pellentesque ac pulvinar lectus, vel blandit erat.''')
 
-    # botão
-    if st.button("Carregar dados"):
-        st.title("Dados carregados!")
-    
-    # exemplos pra tabela
-    data = {
-    'Nome': ['Alice', 'Pablo', 'Carlos'],
-    'Idade': [24, 27, 15]
-}
+    uploaded_file = st.file_uploader("Carregue um arquivo CSV", type="csv")
 
-    # converter para dataframe
-    df = pd.DataFrame(data)
 
-    # mostrando tabela
-    st.table(df)
-
+    # if a file is uploaded, read it and display it
+    if uploaded_file is not None:
+        # ler content do arquivo
+        try:
+            df = pd.read_csv(uploaded_file)
+            st.write(df)
+        except Exception as e:
+            st.write("Erro ao ler arquivo CSV")
+            st.write(e)
+            
 if __name__ == "__main__":
     main()
