@@ -9,45 +9,48 @@ def main():
     Pellentesque ac pulvinar lectus, vel blandit erat.''')
     sep = st.text_input('Digite qual vai ser o separador: ')
     uploaded_file = st.file_uploader("Carregue um arquivo CSV", type="csv")
+    
+    options = ['Ver tudo', 'Primeiras linhas', 'Últimas linhas', 'Mostrar números', 
+                'Tipo de dados', 'Colunas', 'Número de linhas/colunas', 'Linha aleatória']
 
     if uploaded_file is not None:
         try:
             df = pd.read_csv(uploaded_file, sep = sep)
             st.write("Arquivo carregado com sucesso!")
-
+            choice = st.selectbox("Selecione o que quer vizualizar", options)
             # Ver primeiras linhas (usando a função head)
-            if st.checkbox("Mostrar primeiras linhas"):
+            if choice == 'Primeiras linhas':
                 st.write(df.head())
 
             # Ver últimas linhas
             # Crie um checkbox para mostrar as últimas linhas (dica use a função tail)
-            if st.checkbox("Mostrar últimas linhas"):
+            if choice == 'Últimas linhas':
                 st.write(df.tail())
             
             # Ver tudo
-            if st.checkbox("Mostrar tudo"):
+            if choice == 'Ver tudo':
                 st.write(df)
 
             # Ver colunas
             # Crie um checkbox para mostrar as colunas do dataframe (dica use a função columns)
-            if st.checkbox('Mostrar colunas'):
+            if choice == 'Colunas':
                 st.write(df.columns)
 
             # Pesquisar outras funções para vizualização de tabela (describe)
             # Ver uma linha aleátoria
-            if st.checkbox("Mostrar linha aleátoria"):
+            if choice == 'Linha aleatória':
                 st.write(df.sample())
             
             # Número de linhas e número de colunas
-            if st.checkbox("Número de linhas e colunas"):
+            if choice == 'Número de linhas/colunas':
                 st.write(df.shape)
 
             # Estatistícas númericas das colunas
-            if st.checkbox("Mostrar números"):
+            if choice == "Mostrar números":
                 st.write(df.describe())
 
             # Exibir o tipo de dados de cada coluna
-            if st.checkbox("Tipo de dados"):
+            if choice == "Tipo de dados":
                 st.write(df.dtypes)
 
 
