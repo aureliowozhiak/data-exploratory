@@ -1,6 +1,24 @@
 import streamlit as st
 import pandas as pd
 
+def view_options(df, choice):
+    if choice == 'Primeiras linhas':
+        st.write(df.head())
+    elif choice == 'Últimas linhas':
+        st.write(df.tail())
+    elif choice == 'Ver tudo':
+        st.write(df)
+    elif choice == 'Colunas':
+        st.write(df.columns)
+    elif choice == 'Número de linhas/colunas':
+        st.write(df.shape)
+    elif choice == 'Mostrar números':
+        st.write(df.describe())
+    elif choice == 'Tipo de dados':
+        st.write(df.dtypes)
+    elif choice == 'Linha aleatória':
+        st.write(df.sample())
+
 def main():
     st.title("Data Engineer Helper Tool")
 
@@ -18,41 +36,14 @@ def main():
             df = pd.read_csv(uploaded_file, sep = sep)
             st.write("Arquivo carregado com sucesso!")
             choice = st.selectbox("Selecione o que quer vizualizar", options)
-            # Ver primeiras linhas (usando a função head)
-            if choice == 'Primeiras linhas':
-                st.write(df.head())
+            view_options(df, choice)
 
-            # Ver últimas linhas
-            # Crie um checkbox para mostrar as últimas linhas (dica use a função tail)
-            if choice == 'Últimas linhas':
-                st.write(df.tail())
+            # Adicione um botão para criar um gráfico de barras com a contagem de valores de uma coluna
+            # Se clicar no botão, mostre um selectbox com as colunas do dataframe
+            # Se o usuário escolher uma coluna, mostre o gráfico de barras
+            # Use o st.pyplot() para mostrar o gráfico
+            # Use também o método value_counts() do pandas para contar os valores da coluna
             
-            # Ver tudo
-            if choice == 'Ver tudo':
-                st.write(df)
-
-            # Ver colunas
-            # Crie um checkbox para mostrar as colunas do dataframe (dica use a função columns)
-            if choice == 'Colunas':
-                st.write(df.columns)
-
-            # Pesquisar outras funções para vizualização de tabela (describe)
-            # Ver uma linha aleátoria
-            if choice == 'Linha aleatória':
-                st.write(df.sample())
-            
-            # Número de linhas e número de colunas
-            if choice == 'Número de linhas/colunas':
-                st.write(df.shape)
-
-            # Estatistícas númericas das colunas
-            if choice == "Mostrar números":
-                st.write(df.describe())
-
-            # Exibir o tipo de dados de cada coluna
-            if choice == "Tipo de dados":
-                st.write(df.dtypes)
-
 
         except Exception as e:
             st.write("Erro ao ler arquivo CSV")
