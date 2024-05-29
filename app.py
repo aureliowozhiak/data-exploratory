@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 def view_options(df, choice):
     if choice == 'Primeiras linhas':
@@ -43,7 +45,13 @@ def main():
             # Se o usuário escolher uma coluna, mostre o gráfico de barras
             # Use o st.pyplot() para mostrar o gráfico
             # Use também o método value_counts() do pandas para contar os valores da coluna
-            
+            col_choice = st.selectbox("Selecione a coluna para contagem de valores", df.columns)
+            tipo = st.selectbox('Selecione o tipo do gráfico', ['bar', 'area', 'line', 'pie'])
+            if col_choice:
+                if st.button('Criar gráfico de barras'):
+                    fig, ax = plt.subplots()
+                    df[col_choice].value_counts().plot(kind=tipo, ax=ax)
+                    st.pyplot(fig)
 
         except Exception as e:
             st.write("Erro ao ler arquivo CSV")
