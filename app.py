@@ -40,11 +40,23 @@ def main():
             choice = st.selectbox("Selecione o que quer vizualizar", options)
             view_options(df, choice)
 
-            # Adicione um botão para criar um gráfico de barras com a contagem de valores de uma coluna
-            # Se clicar no botão, mostre um selectbox com as colunas do dataframe
-            # Se o usuário escolher uma coluna, mostre o gráfico de barras
-            # Use o st.pyplot() para mostrar o gráfico
-            # Use também o método value_counts() do pandas para contar os valores da coluna
+            # Funções de limpeza de dados
+            st.subheader("Limpeza de Dados")
+            if st.button("Remover Duplicados"):
+                df.drop_duplicates(inplace=True)
+                st.write("Dados duplicados removidos.")
+                st.write(df)
+            
+            # Funções valores nulos
+            null_option = st.selectbox("Selecione uma coluna para tratar valores nulos", ['Todas'] + list(df.columns))
+            if st.button("Remover Valores Nulos"):
+                if null_option == 'Todas':
+                    df.dropna(inplace=True)
+                else:
+                    df.dropna(subset=[null_option], inplace=True)
+                st.write(f"Valores nulos removidos na coluna {null_option}.")
+                st.write(df)
+
             col_choice = st.selectbox("Selecione a coluna para contagem de valores", df.columns)
             tipo = st.selectbox('Selecione o tipo do gráfico', ['bar', 'area', 'line', 'pie'])
             if col_choice:
