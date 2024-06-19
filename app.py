@@ -5,11 +5,7 @@ import matplotlib.pyplot as plt
 from utils import Utils
 
 
-def main():
-    utils = Utils()
-
-    st.title("Data Engineer Helper Tool")
-
+def upload_file():
     st.text('''     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et dui turpis.
     Nulla eu dolor ac magna iaculis tempus. Mauris quis metus tortor.
     Pellentesque ac pulvinar lectus, vel blandit erat.''')
@@ -54,6 +50,32 @@ def main():
         except Exception as e:
             st.write("Erro ao ler arquivo CSV")
             st.write(e)
+
+
+
+def download_html_table():
+    st.text('Data from HTML Table')
+
+    url = st.text_input('Digite a URL do site')
+    position = int(st.number_input('Insira a posição da sua tabela') - 1)
+
+    df = pd.read_html(url)[position]
+
+
+def main():
+    utils = Utils()
+
+    st.title("Data Engineer Helper Tool")
+
+    menu = ['Upload File', 'Download data from HTML table']
+
+    menu_option = st.selectbox("O que você deseja fazer?", menu)
+
+    if menu_option = 'Upload File':
+        upload_file()
+    elif menu_option = 'Download data from HTML table':
+        download_html_table()
+
 
 if __name__ == "__main__":
     main()
