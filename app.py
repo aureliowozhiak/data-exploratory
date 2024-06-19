@@ -2,26 +2,12 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from utils import Utils
 
-def view_options(df, choice):
-    if choice == 'Primeiras linhas':
-        st.write(df.head())
-    elif choice == 'Últimas linhas':
-        st.write(df.tail())
-    elif choice == 'Ver tudo':
-        st.write(df)
-    elif choice == 'Colunas':
-        st.write(df.columns)
-    elif choice == 'Número de linhas/colunas':
-        st.write(df.shape)
-    elif choice == 'Mostrar números':
-        st.write(df.describe())
-    elif choice == 'Tipo de dados':
-        st.write(df.dtypes)
-    elif choice == 'Linha aleatória':
-        st.write(df.sample())
 
 def main():
+    utils = Utils()
+
     st.title("Data Engineer Helper Tool")
 
     st.text('''     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et dui turpis.
@@ -38,7 +24,7 @@ def main():
             df = pd.read_csv(uploaded_file, sep = sep)
             st.write("Arquivo carregado com sucesso!")
             choice = st.selectbox("Selecione o que quer vizualizar", options)
-            view_options(df, choice)
+            utils.view_options(df, choice)
 
             # Funções de limpeza de dados
             st.subheader("Limpeza de Dados")
