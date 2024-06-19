@@ -71,9 +71,9 @@ def main():
 
     menu_option = st.selectbox("O que você deseja fazer?", menu)
 
-    if menu_option = 'Upload File':
+    if menu_option == 'Upload File':
         upload_file()
-    elif menu_option = 'Download data from HTML table':
+    elif menu_option == 'Download data from HTML table':
         download_html_table()
 
 
