@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from utils import Utils
 
-
+utils = Utils()
 def upload_file():
     st.text('''     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et dui turpis.
     Nulla eu dolor ac magna iaculis tempus. Mauris quis metus tortor.

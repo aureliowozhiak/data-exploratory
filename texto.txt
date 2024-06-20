@@ -1,0 +1,9 @@
+    Da linha 1 a 5, estão sendo importadas algumas bibliotecas
+    Linha 7 "chamando" o Utils
+    Linha 8 abre uma função pra fazer upload de arquivos
+    Linha 9 a 11 é mostrar um texto
+    Linha 12 é reconhecer o separador do arquivos csv pedindo
+para digitar o separador dos elementos da tabela
+    Linha 13 é o botão para carregar o arquivo csv
+    Linha 15/16 você pode escolher como vai vai visualizar
+    
