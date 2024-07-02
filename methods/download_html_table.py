@@ -18,17 +18,7 @@ class DownloadHtmlTable:
 
         # Find the table element
         table = soup.find("table")
-
-        # Find the number of tables in the HTML content
-        tables = soup.find_all("table")
-
-        # Get the number of tables
-        number_of_tables = len(tables)
-
-        # Select the table to convert to a pandas DataFrame
-        i = st.selectbox("Selecione a tabela para converter", list(range(number_of_tables)))
-
-        # Convert the table to a pandas DataFrame
-        df = pd.read_html(str(table))[i]
-
+        
+        # Read the table into a pandas DataFrame
+        df = pd.read_html(str(table))[0]
         return df
