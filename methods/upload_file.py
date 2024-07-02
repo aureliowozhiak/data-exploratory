@@ -44,14 +44,43 @@ class UploadFile:
                         df.dropna(subset=[null_option], inplace=True)
                     st.write(f"Valores nulos removidos na coluna {null_option}.")
                     st.write(df)
-
-                col_choice = st.selectbox("Selecione a coluna para contagem de valores", df.columns)
+                
+                '''col_choice = st.selectbox("Selecione a coluna para contagem de valores", df.columns)
                 tipo = st.selectbox('Selecione o tipo do gráfico', ['bar', 'area', 'line', 'pie'])
                 if col_choice:
                     if st.button('Criar gráfico de barras'):
                         fig, ax = plt.subplots()
                         df[col_choice].value_counts().plot(kind=tipo, ax=ax)
-                        st.pyplot(fig)
+                        st.pyplot(fig)'''
+
+                xchoice = st.selectbox('Selecione a coluna com os dados para x', df.columns)
+                ychoice = st.selectbox('Selecione a coluna com os dados para y', df.columns)
+                tipo = st.selectbox('Selecione o tipo do gráfico', ['bar', 'area', 'line', 'pie'])
+                if ychoice and xchoice:
+                    fig, ax = plt.subplots()
+                    if tipo == 'bar':
+                        ax.bar(df[xchoice], df[ychoice])
+                        ax.set_xlabel(xchoice)
+                        ax.set_ylabel(ychoice)
+                        ax.set_title('Gráfico de Barras')
+                    
+                    elif tipo == 'area':
+                        ax.fill_between(df[xchoice], df[ychoice])
+                        ax.set_xlabel(xchoice)
+                        ax.set_ylabel(ychoice)
+                        ax.set_title('Gráfico de Área')
+                    
+                    elif tipo == 'line':
+                        ax.plot(df[xchoice], df[ychoice])
+                        ax.set_xlabel(xchoice)
+                        ax.set_ylabel(ychoice)
+                        ax.set_title('Gráfico de linha')
+
+                    elif tipo == 'pie':
+                        ax.pie(df[ychoice], labels=df[xchoice], autopct='%1.1f%%')
+                        ax.set_title('Gráfico de Pizza')
+                    
+                    st.pyplot(fig)
 
             except Exception as e:
                 st.write("Erro ao ler arquivo CSV")
